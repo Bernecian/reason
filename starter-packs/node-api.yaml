@@ -1,0 +1,45 @@
+# .r/rules.yaml — Node + TypeScript API (Fastify / Express / Hono)
+
+config:
+  cache_ttl_ms: 60000
+
+rules:
+  - name: conventions
+    match:
+      keywords: [convention, commit, rule, workflow, style]
+    load:
+      - CLAUDE.md
+    reason: Project conventions.
+
+  - name: routes
+    match:
+      keywords: [route, endpoint, handler, api]
+      paths: ["src/routes/**/*.ts", "src/api/**/*.ts"]
+    load:
+      - "docs/api*.md"
+    reason: API conventions.
+
+  - name: schemas
+    match:
+      keywords: [schema, validation, zod, typebox]
+      paths: ["src/schemas/**/*.ts"]
+    load:
+      - "docs/schema*.md"
+    reason: Validation layer.
+
+  - name: env-config
+    match:
+      keywords: [env, environment, config, secret]
+    load:
+      - .env.example
+      - "docs/env*.md"
+    reason: Required env keys.
+
+  # - name: package-scripts
+  #   match:
+  #     keywords: [script, command, pnpm run, npm run]
+  #   run:
+  #     - cmd: "jq -r '.scripts | to_entries[] | \"\\(.key): \\(.value)\"' package.json"
+  #       timeout: 1500
+  #   # trust: true
+  #   reason: Show available package.json scripts.

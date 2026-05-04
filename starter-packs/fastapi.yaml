@@ -1,0 +1,46 @@
+# .r/rules.yaml — FastAPI (Python) starter pack
+
+config:
+  cache_ttl_ms: 60000
+
+rules:
+  - name: conventions
+    match:
+      keywords: [convention, commit, rule, workflow, style]
+    load:
+      - CLAUDE.md
+    reason: Project conventions.
+
+  - name: routes
+    match:
+      keywords: [route, endpoint, handler, api]
+      paths: ["app/routers/**/*.py", "app/api/**/*.py"]
+    load:
+      - "docs/api*.md"
+    reason: API conventions live in docs/api.
+
+  - name: db-schema
+    match:
+      keywords: [model, schema, migration, alembic, sqlalchemy]
+      paths: ["app/models/**/*.py", "alembic/versions/**/*.py"]
+    load:
+      - "docs/schema*.md"
+    reason: Schema and migration rules.
+
+  - name: deps
+    match:
+      keywords: [dependency, requirements, poetry, pyproject]
+    load:
+      - pyproject.toml
+      - requirements*.txt
+    reason: Python deps shape.
+
+  # - name: pytest-collect
+  #   match:
+  #     keywords: [test, pytest]
+  #   run:
+  #     - cmd: "pytest --collect-only -q | head -40 || true"
+  #       timeout: 3000
+  #       max_bytes: 4096
+  #   # trust: true
+  #   reason: Show available tests before writing new ones.

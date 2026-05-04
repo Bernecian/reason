@@ -1,0 +1,39 @@
+# .r/rules.yaml — Rust workspace starter pack
+
+config:
+  cache_ttl_ms: 120000
+
+rules:
+  - name: conventions
+    match:
+      keywords: [convention, commit, rule, workflow, style, clippy]
+    load:
+      - CLAUDE.md
+      - clippy.toml
+      - rustfmt.toml
+    reason: Rust conventions + lints.
+
+  - name: workspace
+    match:
+      keywords: [workspace, crate, cargo, dependency]
+    load:
+      - Cargo.toml
+    reason: Workspace and crate layout.
+
+  - name: api-routes
+    match:
+      keywords: [route, handler, api, axum, actix]
+      paths: ["crates/**/src/routes/**/*.rs", "src/routes/**/*.rs"]
+    load:
+      - "docs/api*.md"
+    reason: API conventions.
+
+  # - name: compile-check
+  #   match:
+  #     keywords: [compile, build, check]
+  #   run:
+  #     - cmd: "cargo check --message-format short 2>&1 | tail -20"
+  #       timeout: 5000
+  #       max_bytes: 4096
+  #   # trust: true
+  #   reason: Show the current compile state before making changes.

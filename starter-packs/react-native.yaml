@@ -1,0 +1,46 @@
+# .r/rules.yaml — React Native (Expo or bare) starter pack
+
+config:
+  cache_ttl_ms: 60000
+
+rules:
+  - name: conventions
+    match:
+      keywords: [convention, commit, rule, workflow, style]
+    load:
+      - CLAUDE.md
+    reason: Project conventions.
+
+  - name: screens-components
+    match:
+      keywords: [screen, component, layout, tab, nav, navigation, style]
+      paths: ["src/**/*.tsx", "app/**/*.tsx", "components/**/*.tsx"]
+    load:
+      - "docs/design*.md"
+      - "docs/components*.md"
+    reason: RN UI and navigation follow the project design system.
+
+  - name: platform-native
+    match:
+      keywords: [healthkit, permission, ios, android, native module]
+    load:
+      - "docs/native*.md"
+      - "docs/permissions*.md"
+    reason: Native-side integrations have their own rules.
+
+  - name: expo-config
+    match:
+      keywords: [expo, app.json, config plugin, eas]
+    load:
+      - app.json
+      - app.config.*
+    reason: Expo config and EAS settings.
+
+  # - name: device-list
+  #   match:
+  #     keywords: [device, simulator, emulator]
+  #   run:
+  #     - cmd: "xcrun simctl list devices booted || true"
+  #       timeout: 2000
+  #   # trust: true
+  #   reason: Show which simulators are booted before device-specific work.

@@ -1,0 +1,48 @@
+# .r/rules.yaml — Next.js starter pack
+
+config:
+  cache_ttl_ms: 60000
+
+rules:
+  - name: conventions
+    match:
+      keywords: [convention, commit, workflow, rule, style]
+    load:
+      - CLAUDE.md
+    reason: Project conventions.
+
+  - name: ui
+    match:
+      keywords: [component, page, layout, style, tailwind, design, ui]
+      paths: ["app/**/*.tsx", "components/**/*.tsx", "**/*.module.css"]
+    load:
+      - "docs/design*.md"
+      - "tailwind.config.*"
+    reason: UI work should follow the design system + Tailwind config.
+
+  - name: routes
+    match:
+      keywords: [route, api, handler, endpoint]
+      paths: ["app/api/**/*.ts", "app/api/**/*.tsx"]
+    load:
+      - "docs/api*.md"
+    reason: API conventions live in docs/api.
+
+  - name: env-config
+    match:
+      keywords: [env, environment, config, secret]
+    load:
+      - .env.example
+      - "docs/env*.md"
+    reason: Env shape and required keys.
+
+  # Example pre-flight — review then flip `trust: true`:
+  # - name: recent-commits
+  #   match:
+  #     keywords: [recent, last, what changed, since]
+  #   run:
+  #     - cmd: "git log --oneline -15"
+  #       timeout: 1500
+  #       max_bytes: 2048
+  #   # trust: true
+  #   reason: Surface recent commits when the prompt references them.

@@ -1,0 +1,17 @@
+{
+  "name": "r",
+  "owner": {
+    "name": "bernecyan.dev"
+  },
+  "plugins": [
+    {
+      "name": "r",
+      "source": "./",
+      "description": "Reason — pre-flight grounding for Claude Code. Deterministic, hook-driven rules that inline docs and run trusted commands at UserPromptSubmit, so the model starts already grounded.",
+      "homepage": "https://github.com/Bernecian/reason",
+      "repository": "https://github.com/Bernecian/reason",
+      "license": "MIT",
+      "keywords": ["claude-code", "hooks", "grounding", "context", "pre-flight", "rules"]
+    }
+  ]
+}

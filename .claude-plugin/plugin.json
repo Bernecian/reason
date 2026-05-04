@@ -1,0 +1,12 @@
+{
+  "name": "r",
+  "version": "0.2.1",
+  "description": "Reason — pre-flight grounding for Claude Code. Match the prompt, inline docs, run trusted commands before the model reasons.",
+  "author": {
+    "name": "bernecyan.dev"
+  },
+  "homepage": "https://github.com/Bernecian/reason",
+  "repository": "https://github.com/Bernecian/reason",
+  "license": "MIT",
+  "keywords": ["claude-code", "hooks", "grounding", "context", "pre-flight", "rules", "plugin"]
+}

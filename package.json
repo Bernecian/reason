@@ -1,0 +1,17 @@
+{
+  "name": "@self/r",
+  "version": "0.2.1",
+  "private": true,
+  "description": "Reason — pre-flight grounding for Claude Code. Match the prompt, inline docs, run trusted commands before the model reasons.",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "yaml": "^2.4.5"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "build:vendor": "esbuild --bundle --platform=node --format=cjs --minify --target=node18 --outfile=lib/vendor/yaml.js node_modules/yaml/dist/index.js"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,46 @@
+# .r/rules.yaml — generic pnpm / turbo monorepo starter pack
+
+config:
+  cache_ttl_ms: 60000
+
+rules:
+  - name: conventions
+    match:
+      keywords: [convention, commit, rule, workflow, style]
+    load:
+      - CLAUDE.md
+    reason: Project conventions.
+
+  - name: workspace-shape
+    match:
+      keywords: [workspace, package, app, turbo, pnpm]
+    load:
+      - pnpm-workspace.yaml
+      - turbo.json
+      - package.json
+    reason: Workspace layout.
+
+  - name: app-specific-readme
+    match:
+      paths: ["apps/**/*"]
+    load:
+      - "apps/*/CLAUDE.md"
+      - "apps/*/README.md"
+    reason: App-specific rules + README.
+
+  - name: package-specific-readme
+    match:
+      paths: ["packages/**/*"]
+    load:
+      - "packages/*/README.md"
+    reason: Shared-package READMEs.
+
+  # - name: pnpm-filter-list
+  #   match:
+  #     keywords: [filter, which package, which app]
+  #   run:
+  #     - cmd: "pnpm -r --depth=-1 list --json | jq -r '.[].name' | sort"
+  #       timeout: 3000
+  #       max_bytes: 4096
+  #   # trust: true
+  #   reason: Enumerate workspace packages.
